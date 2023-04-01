@@ -3,7 +3,7 @@ import { Button } from '@mui/material'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-function UserButton() {
+function UserButton({text , click}) {
 
     return (
         <>
@@ -11,13 +11,15 @@ function UserButton() {
                 variant='contained'
                 type='submit'
                 sx={{
-                    p: '10px 100px',
-                    borderRadius: 0,
+                    p: '10px 60px',
+                    borderRadius: 30,
                     backgroundColor: '#b91bff',
                     color: '#fff'
                 }}
+                onClick={click}
             >
-                Login</Button>
+                {text}
+            </Button>
         </>
     );
 }
