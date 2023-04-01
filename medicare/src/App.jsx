@@ -6,11 +6,14 @@ import Profile from './pages/Profile/Profile'
 import Emergency from './pages/Emergency/Emergency'
 import BloodBank from './pages/BloodBank/BloodBank'
 import './App.css'
+import Navbar from './components/Navbar/Navbar'
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <Navbar/>
+
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
