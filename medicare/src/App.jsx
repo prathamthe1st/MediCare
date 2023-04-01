@@ -15,15 +15,15 @@ function App() {
 
   useEffect(
     () => {
-    axios.get('https://django-hack-api.vercel.app/hospital/')
-      .then(response => {
-        setData(response.data)
-        console.log(response.data)
-        ;
-      }).catch(err => {
-        console.error(err);
-      });
-  }, []);
+      axios.get('https://django-hack-api.vercel.app/hospital/'  )
+        .then(response => {
+          setData(response.data)
+          console.log(data)
+            ;
+        }).catch(err => {
+          console.error(err);
+        });
+    }, []);
   console.log(data)
   return (
     <BrowserRouter>
