@@ -8,6 +8,7 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link } from 'react-router-dom'
 import { Box, Typography, useMediaQuery, TextField, Button, InputAdornment, IconButton, Checkbox } from '@mui/material'
 import Logo from '../../components/Logo/Logo'
+import UserButton from '../../components/Button/UserButton';
 // import { auth, db, analytics, googleauth } from '../../config/firebase'
 // import { signInWithEmailAndPassword } from 'firebase/auth'
 
@@ -103,8 +104,7 @@ function Login() {
         >
             <Box sx={{
                 backgroundColor: 'transparent',
-                height: '65vh',
-                // width: breakpoint ? '60%' : '20%',
+                height: '70vh',
                 maxWidth: 400,
                 margin: '50px auto',
                 borderRadius: '30px',
@@ -126,11 +126,6 @@ function Login() {
                                 sx={{
                                     fontWeight: 'bold',
                                 }}
-
-
-
-
-                                
                             >
                                 Login
                             </Typography>
@@ -155,9 +150,7 @@ function Login() {
                                         "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
                                             border: "1px solid #484850",
                                             borderRadius: "5px 5px 0 0",
-
                                         },
-
                                         borderRadius: '0 !important',
                                     }}
                                     size='small'
@@ -197,9 +190,7 @@ function Login() {
                                         "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
                                             border: "1px solid #484850",
                                             borderRadius: "5px 5px 0 0",
-
                                         },
-
                                         borderRadius: '0 !important',
                                     }}
                                     size='small'
@@ -255,7 +246,7 @@ function Login() {
                             animate='visible'
                         >
                             <Box m='20px'>
-                                <Button
+                                {/* <Button
                                     variant='contained'
                                     type='submit'
                                     sx={{
@@ -269,10 +260,11 @@ function Login() {
                                         backgroundColor: '#b91bff',
                                         color: '#fff'
                                     }}
-                                    onClick={handleLogin}
+                                    // onClick={handleLogin}
                                 >
                                     Login
-                                </Button>
+                                </Button> */}
+                                <UserButton text='Login' />
                             </Box>
                         </motion.div>
                     </Box>

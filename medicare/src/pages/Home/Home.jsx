@@ -3,6 +3,10 @@ import { Box, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import UserButton from '../../components/Button/UserButton'
 import { motion } from 'framer-motion'
+import './Home.css'
+import { useMediaQuery } from 'react'
+import { useTheme } from '@mui/material/styles'
+import Animatedlogo from '../../components/Animatedlogo/Animatedlogo'
 
 
 const button1Animations = {

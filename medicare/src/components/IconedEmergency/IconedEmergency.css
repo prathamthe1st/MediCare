@@ -1,0 +1,15 @@
+/* .MuiIconButton-root:hover {
+    background: none;
+    background-color: aqua !important;
+} */
+.iconed-emergency-box:active {
+    /* background-color: #3e8e41; */
+    box-shadow: 0 5px #313131;
+    transform: translateY(4px);
+}
+.iconed-emergency-box:hover {
+    /* background-color: #3e8e41; */
+    /* box-shadow: 0 5px #313131;
+    transform: translateY(4px); */
+    cursor: pointer;
+}

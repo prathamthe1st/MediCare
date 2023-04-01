@@ -23,7 +23,9 @@ function App() {
         }).catch(err => {
           console.error(err);
         });
-    }, []);
+        return (()=> data) 
+    }, []
+    );
   console.log(data)
   return (
     <BrowserRouter>
