@@ -26,7 +26,15 @@ function Navbar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const navigate = useNavigate()
   return (
-    <Box display='flex' flexDirection='row' justifyContent='space-between' alignItems='center'>
+    <Box 
+      display='flex' 
+      flexDirection='row' 
+      justifyContent='space-between' 
+      alignItems='center'
+      sx={{
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+      }}
+    >
       {breakpoint && <Box>
         <IconButton onClick={() => setIsDrawerOpen(true)}>
           <MenuIcon sx={{
@@ -123,7 +131,6 @@ function Navbar() {
             <NavbarItem
               text='Blood'
               color='#ffffff'
-              // color='#000000'
               link='/bloodbank'
             />
           </Box>
