@@ -1,26 +1,28 @@
-import React from "react";
+import React from 'react'
+import './HospitalCard.css'
+import { Link } from 'react-router-dom'
+import { Box, Typography, useMediaQuery } from '@mui/material'
 
-function Profile() {
-  return (
-    <>
-      {/* 
-        // <motion.div>
-        //     <Box
-        //     sx= {{
-                         maxWidth: 800,
+function HospitalCard() {
+    const breakpoint = useMediaQuery('(min-width:800px)')
+    return (
+        <motion.div>
+            <Box
+            sx={{
+                maxWidth: 800,
                 height: breakpoint ? '70vh' : '150vh',
                 m: '40px auto',
                 borderRadius: '30px',
                 boxShadow: '0px 5px 10px 0px rgba(0, 0, 0, 0.5)',
                 background: 'linear-gradient(to bottom , #01570c , #019114 , transparent)'
-                
-        //     }}
+            }}
+        >
             <Box
                 width='100%'
                 height='100%'
                 textAlign='center'
             >
-            <Typography
+                <Typography
                     variant='h6'
                     sx={{
                         color: 'white',
@@ -29,11 +31,29 @@ function Profile() {
                         pt: '20px',
                     }}
                 >
-                    Hello User,  
-                    // props
+                    Hospital Name
                 </Typography>
-                 <br />
-                Box
+                <br />
+                <Typography
+                    variant='h6'
+                    sx={{
+                        color: 'white',
+                        fontSize: '15px',
+                        fontFamily: 'Poppins',
+                    }}
+                >
+                    Address
+                </Typography>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: breakpoint ? 'row' : 'column',
+                        justifyContent: breakpoint ? 'space-between' : 'center',
+                        alignItems: breakpoint ? 'flex-start' : 'center',
+                        width: '100%',
+                    }}
+                >
+                    <Box
                         sx={{
                             display: 'flex',
                             flexDirection: 'column',
@@ -57,7 +77,7 @@ function Profile() {
                                 ml: '20px',
                             }}
                         >
-                            Name: Surabhi Bhagatkar
+                            Contact Information: 1234567890
                         </Typography>
                         <Typography
                             variant='h6'
@@ -70,7 +90,7 @@ function Profile() {
                                 ml: '20px',
                             }}
                         >
-                            Bloodtype : B+
+                            Speciality : ENT
                         </Typography>
                         <Typography
                             variant='h6'
@@ -83,7 +103,7 @@ function Profile() {
                                 ml: '20px',
                             }}
                         >
-                            Age: 17
+                            Contact Information 2: 1234567890
                         </Typography>
                         <Typography
                             variant='h6'
@@ -95,7 +115,7 @@ function Profile() {
                                 ml: '20px',
                             }}
                         >
-                            Allergy : [Peanut, G6PD]
+                            Distance : 10km
                         </Typography>
                         <Link to='/'>
                             <Typography
@@ -108,19 +128,43 @@ function Profile() {
                                     ml: '20px',
                                 }}
                             >
-                               Contact No./Email: 9930875121
+                                www.hospitalname.com
                             </Typography>
                         </Link>
-                        
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                padding: '30px',
+                            }}
+                        >
+                            <Typography
+                                variant='h6'
+                                sx={{
+                                    fontFamily: 'Poppins',
+                                    color: 'white',
+                                    fontSize: '15px',
+                                    textDecoration: 'underline',
+                                    ml: '40px',
+                                }}
+                            >
+                                Available Beds : 1000
+                            </Typography>
+                        </Box>
                     </Box>
                     <Box
                         p={7}
                     >
                         <img src='../../../public/temp-image-map.png' className='map' width='300px' height='300px' alt='map' />
-                    </Box>                    
-        // </motion.div> */}
-    </>
-  );
+                    </Box>
+                </Box>
+            </Box>
+        </Box>
+        </motion.div>
+
+    )
 }
 
-export default Profile;
+export default HospitalCard

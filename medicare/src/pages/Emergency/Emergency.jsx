@@ -7,19 +7,113 @@ import { useMediaQuery } from '@mui/material'
 import IconedEmergency from '../../components/IconedEmergency/IconedEmergency'
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 
-const emergencyboxAnimation = {
+const emergencybox1Animation = {
     hidden: {
         opacity: 0,
     },
     visible: {
         opacity: 1,
-        transition: (delay) => ({
+        transition: {
             type: "tween",
-            delay: delay,
-            duration: 1.3,
-        })
+            delay: 0.7,
+            duration: 1,
+        }
     }
 }
+const emergencybox2Animation = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            type: "tween",
+            delay: 0.8,
+            duration: 1,
+        }
+    }
+}
+const emergencybox3Animation = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            type: "tween",
+            delay: 0.9,
+            duration: 1,
+        }
+    }
+}
+const emergencybox4Animation = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            type: "tween",
+            delay: 1,
+            duration: 1,
+        }
+    }
+}
+const emergencybox5Animation = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            type: "tween",
+            delay: 1.1,
+            duration: 1,
+        }
+    }
+}
+const emergencybox6Animation = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            type: "tween",
+            delay: 1.2,
+            duration: 1,
+        }
+    }
+}
+const emergencybox7Animation = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            type: "tween",
+            delay: 1.3,
+            duration: 1,
+        }
+    }
+}
+const mapAnimation = {
+    hidden: {
+        opacity: 0,
+        x: '100vw'
+    },
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            type: "tween",
+            delay: 1.4,
+            duration: 1,
+        }
+    }
+}
+
 
 
 function Emergency() {
@@ -61,54 +155,48 @@ function Emergency() {
                 </Typography>
                 <Box display='flex' flexDirection='row' justifyContent='center' alignItems='center'>
                     <motion.div
-                        variants={emergencyboxAnimation}
+                        variants={emergencybox1Animation}
                         initial='hidden'
                         animate='visible'
-                        custom={0.2}
                     >
                         <IconedEmergency icon={'../../../public/ENT.svg'} text='ENTs' click={() => setSelected('ENTs')} />
                     </motion.div>
                     <motion.div
-                        variants={emergencyboxAnimation}
+                        variants={emergencybox2Animation}
                         initial='hidden'
                         animate='visible'
-                        custom={0.4}
                     >
                         <IconedEmergency icon={'../../../public/Brain.svg'} text='Neurologist' click={() => setSelected('Neurologists')} />
                     </motion.div>
                 </Box>
                 <Box display='flex' flexDirection='row' justifyContent='center' alignItems='center'>
                     <motion.div
-                        variants={emergencyboxAnimation}
+                        variants={emergencybox3Animation}
                         initial='hidden'
                         animate='visible'
-                        custom={0.6}
                     >
                         <IconedEmergency icon={'../../../public/vet.svg'} text='Veterinarians' click={() => setSelected('Veterinarians')} />
                     </motion.div>
                     <motion.div
-                        variants={emergencyboxAnimation}
+                        variants={emergencybox4Animation}
                         initial='hidden'
                         animate='visible'
-                        custom={0.8}
                     >
                         <IconedEmergency icon={'../../../public/cardiac.svg'} text='Cardiologists' click={() => setSelected('Cardiologists')} />
                     </motion.div>
                 </Box>
                 <Box display='flex' flexDirection='row' justifyContent='center' alignItems='center'>
                     <motion.div
-                        variants={emergencyboxAnimation}
+                        variants={emergencybox5Animation}
                         initial='hidden'
                         animate='visible'
-                        custom={1}
                     >
                         <IconedEmergency icon={'../../../public/baby.svg'} text='Pediatricians' click={() => setSelected('Pediatricians')} />
                     </motion.div>
                     <motion.div
-                        variants={emergencyboxAnimation}
+                        variants={emergencybox6Animation}
                         initial='hidden'
                         animate='visible'
-                        custom={1.2}
                     >
                         <IconedEmergency icon={'../../../public/pregnanr.svg'} text='Gynecologists' click={() => setSelected('Gynecologists')} />
                     </motion.div>
@@ -142,7 +230,13 @@ function Emergency() {
                 >
                     Location of Nearby Hospitals
                 </Typography>
-                <img src='../../../public/temp-image-map.png' width='300px' height='300px' />
+                <motion.div
+                    variants={mapAnimation}
+                    initial='hidden'
+                    animate='visible'
+                >
+                    <img src='../../../public/temp-image-map.png' width='300px' height='300px' />
+                </motion.div>
             </Box>
         </Box>
     )

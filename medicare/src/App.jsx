@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect , createContext  } from 'react'
 import axios from 'axios'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
@@ -10,12 +10,17 @@ import BloodBank from './pages/BloodBank/BloodBank'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import UserButton from './components/Button/UserButton'
+import HospitalCard from './pages/HospitalCard/HospitalCard'
+
+export const DataContext = createContext();
+
+
 function App() {
   const [data, setData] = useState([]);
 
   useEffect(
     () => {
-      axios.get('https://django-hack-api.vercel.app/hospital/'  )
+      axios.get('https://django-hack-api.vercel.app/hospital/')
         .then(response => {
           setData(response.data)
           console.log(data)
@@ -23,26 +28,27 @@ function App() {
         }).catch(err => {
           console.error(err);
         });
-        return (()=> data) 
+      return (() => data)
     }, []
-    );
+  );
   console.log(data)
   return (
     <BrowserRouter>
-      <div className="App">
-        <Navbar />
-        {/* <UserButton /> */}
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/bloodbank' element={<BloodBank />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/emergency' element={<Emergency />} />
-        </Routes>
-      </div>
+      <DataContext.Provider value={data}>
+        <div className="App">
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/bloodbank' element={<BloodBank />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/emergency' element={<Emergency />} />
+            <Route path='/hospital' element={<HospitalCard />} />
+          </Routes>
+        </div>
+      </DataContext.Provider>
     </BrowserRouter>
-
   )
 }
 
