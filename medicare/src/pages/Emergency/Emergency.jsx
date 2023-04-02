@@ -239,14 +239,14 @@ function Emergency() {
                         initial='hidden'
                         animate='visible'
                     >
-                        <IconedEmergency icon={'../../../public/ENT.svg'} text='Surgeon' click={() => { navigate('/surgeon') }} />
+                        <IconedEmergency icon={'../../../ENT.svg'} text='Surgeon' click={() => { navigate('/surgeon') }} />
                     </motion.div>
                     <motion.div
                         variants={emergencybox2Animation}
                         initial='hidden'
                         animate='visible'
                     >
-                        <IconedEmergency icon={'../../../public/Brain.svg'} text='Neurologist' click={() => { navigate('/neuro') }} />
+                        <IconedEmergency icon={'../../../Brain.svg'} text='Neurologist' click={() => { navigate('/neuro') }} />
                     </motion.div>
                 </Box>
                 <Box display='flex' flexDirection='row' justifyContent='center' alignItems='center'>
@@ -255,14 +255,14 @@ function Emergency() {
                         initial='hidden'
                         animate='visible'
                     >
-                        <IconedEmergency icon={'../../../public/vet.svg'} text='Veterinarians' click={() => { navigate('/vet') }} />
+                        <IconedEmergency icon={'../../../vet.svg'} text='Veterinarians' click={() => { navigate('/vet') }} />
                     </motion.div>
                     <motion.div
                         variants={emergencybox4Animation}
                         initial='hidden'
                         animate='visible'
                     >
-                        <IconedEmergency icon={'../../../public/cardiac.svg'} text='Cardiologists' click={() => { navigate('/cardiac') }} />
+                        <IconedEmergency icon={'../../../cardiac.svg'} text='Cardiologists' click={() => { navigate('/cardiac') }} />
                     </motion.div>
                 </Box>
                 <Box display='flex' flexDirection='row' justifyContent='center' alignItems='center'>
@@ -271,14 +271,14 @@ function Emergency() {
                         initial='hidden'
                         animate='visible'
                     >
-                        <IconedEmergency icon={'../../../public/baby.svg'} text='Pediatricians' click={() => { navigate('/pedia') }} />
+                        <IconedEmergency icon={'../../../baby.svg'} text='Pediatricians' click={() => { navigate('/pedia') }} />
                     </motion.div>
                     <motion.div
                         variants={emergencybox6Animation}
                         initial='hidden'
                         animate='visible'
                     >
-                        <IconedEmergency icon={'../../../public/pregnanr.svg'} text='Gynecologists' click={() => { navigate('/gynec') }} />
+                        <IconedEmergency icon={'../../../pregnanr.svg'} text='Gynecologists' click={() => { navigate('/gynec') }} />
                     </motion.div>
                 </Box>
             </Box>

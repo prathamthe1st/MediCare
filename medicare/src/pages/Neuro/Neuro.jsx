@@ -25,15 +25,17 @@ function Neuro() {
         getFirebaseData();
     }, []);
 
+    const cardiac = hospitals.filter((hospital) => hospital.Speciality === 'Neurologist');
+
     useEffect(() => {
-        if (hospitals.length > 0) {
+        if (cardiac.length > 0) {
             setViewport({
-                latitude: hospitals[0].latitude,
-                longitude: hospitals[0].longitude,
+                latitude: cardiac[0].latitude,
+                longitude: cardiac[0].longitude,
                 zoom: 9
             });
         }
-    }, [hospitals]);
+    }, [cardiac]);
 
     const [viewport, setViewport] = useState({
         latitude: 0,
@@ -42,7 +44,7 @@ function Neuro() {
     });
     const geojson = {
         type: 'FeatureCollection',
-        features: hospitals.map(hospital => {
+        features: cardiac.map(hospital => {
             return {
                 type: 'Feature',
                 geometry: {
@@ -62,8 +64,7 @@ function Neuro() {
         })
     };
 
-    const cardiac = hospitals.filter((hospital) => hospital.Speciality === 'Ortho');
-    console.log(cardiac)
+
 
     const layerStyle = {
         id: 'hospitals-markers',
@@ -90,7 +91,7 @@ function Neuro() {
             map.addImage('pin', pinImage);
         };
         // Set the source of the image element to the pin image file
-        pinImage.src = 'PIN.png';
+        pinImage.src = '/PIN.png';
     };
     return (
         <motion.div>
@@ -251,7 +252,20 @@ function Neuro() {
                                 <Box
                                     p={7}
                                 >
-                                    <img src='../../../public/temp-image-map.png' className='map' width='300px' height='300px' alt='map' />
+                                    <ReactMapGL {...viewport}
+    mapboxAccessToken="pk.eyJ1IjoicHJhdGhhbXRoZTFzdCIsImEiOiJjbGZ3czN0aXUwazlkM2VxdWljcmt3MjhzIn0.45U1YoK40iFNEeQey6iBOA"
+    mapStyle={"mapbox://styles/mapbox/streets-v11"}
+    style={{width: '300px', height: '300px'}}
+    onViewportChange={viewport => {
+      setViewport(viewport);
+    }}
+    onLoad={onLoad}
+  >
+    <Source id="places" type="geojson" data={geojson}>
+        <Layer {...layerStyle} />
+    </Source>
+
+  </ReactMapGL>
                                 </Box>
                             </Box>
                         </Box>

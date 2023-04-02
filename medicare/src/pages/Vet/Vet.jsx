@@ -25,15 +25,17 @@ function Vet() {
         getFirebaseData();
     }, []);
 
+    const vet = hospitals.filter((hospital) => hospital.Speciality === ' Veterinarian');
+
     useEffect(() => {
-        if (hospitals.length > 0) {
+        if (vet.length > 0) {
             setViewport({
-                latitude: hospitals[0].latitude,
-                longitude: hospitals[0].longitude,
+                latitude: vet[0].latitude,
+                longitude: vet[0].longitude,
                 zoom: 9
             });
         }
-    }, [hospitals]);
+    }, [vet]);
 
     const [viewport, setViewport] = useState({
         latitude: 0,
@@ -42,7 +44,7 @@ function Vet() {
     });
     const geojson = {
         type: 'FeatureCollection',
-        features: hospitals.map(hospital => {
+        features: vet.map(hospital => {
             return {
                 type: 'Feature',
                 geometry: {
@@ -62,6 +64,8 @@ function Vet() {
         })
     };
 
+
+
     const layerStyle = {
         id: 'hospitals-markers',
         type: 'symbol',
@@ -76,8 +80,7 @@ function Vet() {
         // }
     };
 
-    const cardiac = hospitals.filter((hospital) => hospital.Speciality === 'Ortho');
-    console.log(cardiac)
+
 
     const onLoad = (event) => {
         // Get the map instance from the event object
@@ -90,7 +93,7 @@ function Vet() {
             map.addImage('pin', pinImage);
         };
         // Set the source of the image element to the pin image file
-        pinImage.src = 'PIN.png';
+        pinImage.src = '/PIN.png';
     };
     const breakpoint = useMediaQuery('(min-width:800px)')
     return (
@@ -101,7 +104,7 @@ function Vet() {
                     flexDirection: 'column'
                 }}
             >
-                {cardiac.map((hospital) => (
+                {vet.map((hospital) => (
                     <Box
                         key={hospital.index}
                         sx={{
@@ -252,7 +255,20 @@ function Vet() {
                                 <Box
                                     p={7}
                                 >
-                                    <img src='../../../public/temp-image-map.png' className='map' width='300px' height='300px' alt='map' />
+                                   <ReactMapGL {...viewport}
+    mapboxAccessToken="pk.eyJ1IjoicHJhdGhhbXRoZTFzdCIsImEiOiJjbGZ3czN0aXUwazlkM2VxdWljcmt3MjhzIn0.45U1YoK40iFNEeQey6iBOA"
+    mapStyle={"mapbox://styles/mapbox/streets-v11"}
+    style={{width: '300px', height: '300px'}}
+    onViewportChange={viewport => {
+      setViewport(viewport);
+    }}
+    onLoad={onLoad}
+  >
+    <Source id="places" type="geojson" data={geojson}>
+        <Layer {...layerStyle} />
+    </Source>
+
+  </ReactMapGL>
                                 </Box>
                             </Box>
                         </Box>

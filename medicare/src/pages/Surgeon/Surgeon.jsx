@@ -24,15 +24,17 @@ function Surgeon() {
         getFirebaseData();
     }, []);
 
+    const surgeon = hospitals.filter((hospital) => hospital.Speciality === 'Surgeon');
+
     useEffect(() => {
-        if (hospitals.length > 0) {
+        if (surgeon.length > 0) {
             setViewport({
-                latitude: hospitals[0].latitude,
-                longitude: hospitals[0].longitude,
+                latitude: surgeon[0].latitude,
+                longitude: surgeon[0].longitude,
                 zoom: 9
             });
         }
-    }, [hospitals]);
+    }, [surgeon]);
 
     const [viewport, setViewport] = useState({
         latitude: 0,
@@ -41,7 +43,7 @@ function Surgeon() {
     });
     const geojson = {
         type: 'FeatureCollection',
-        features: hospitals.map(hospital => {
+        features: surgeon.map(hospital => {
             return {
                 type: 'Feature',
                 geometry: {
@@ -61,6 +63,8 @@ function Surgeon() {
         })
     };
 
+
+
     const layerStyle = {
         id: 'hospitals-markers',
         type: 'symbol',
@@ -74,8 +78,7 @@ function Surgeon() {
         //   'icon-color': '#78546'
         // }
     };
-    const cardiac = hospitals.filter((hospital) => hospital.Speciality === 'Ortho');
-    console.log(cardiac)
+
 
     const onLoad = (event) => {
         // Get the map instance from the event object
@@ -88,7 +91,7 @@ function Surgeon() {
             map.addImage('pin', pinImage);
         };
         // Set the source of the image element to the pin image file
-        pinImage.src = 'PIN.png';
+        pinImage.src = '/PIN.png';
     };
     const breakpoint = useMediaQuery('(min-width:800px)')
     return (
@@ -99,7 +102,7 @@ function Surgeon() {
                     flexDirection: 'column'
                 }}
             >
-                {cardiac.map((hospital) => (
+                {surgeon.map((hospital) => (
                     <Box
                         key={hospital.index}
                         sx={{
@@ -250,7 +253,20 @@ function Surgeon() {
                                 <Box
                                     p={7}
                                 >
-                                    <img src='../../../public/temp-image-map.png' className='map' width='300px' height='300px' alt='map' />
+                                    <ReactMapGL {...viewport}
+    mapboxAccessToken="pk.eyJ1IjoicHJhdGhhbXRoZTFzdCIsImEiOiJjbGZ3czN0aXUwazlkM2VxdWljcmt3MjhzIn0.45U1YoK40iFNEeQey6iBOA"
+    mapStyle={"mapbox://styles/mapbox/streets-v11"}
+    style={{width: '300px', height: '300px'}}
+    onViewportChange={viewport => {
+      setViewport(viewport);
+    }}
+    onLoad={onLoad}
+  >
+    <Source id="places" type="geojson" data={geojson}>
+        <Layer {...layerStyle} />
+    </Source>
+
+  </ReactMapGL>
                                 </Box>
                             </Box>
                         </Box>

@@ -25,17 +25,19 @@ function Gynec() {
         getFirebaseData();
     }, []);
 
+    const gynec = hospitals.filter((hospital) => hospital.Speciality === 'Gynecologist');
+    console.log(gynec)
+
     useEffect(() => {
-        if (hospitals.length > 0) {
+        if (gynec.length > 0) {
             setViewport({
-                latitude: hospitals[0].latitude,
-                longitude: hospitals[0].longitude,
+                latitude: gynec[0].latitude,
+                longitude: gynec[0].longitude,
                 zoom: 9
             });
         }
-    }, [hospitals]);
-    const cardiac = hospitals.filter((hospital) => hospital.Speciality === 'Ortho');
-    console.log(cardiac)
+    }, [gynec]);
+
     const [viewport, setViewport] = useState({
         latitude: 0,
         longitude: 0,
@@ -43,7 +45,7 @@ function Gynec() {
     });
     const geojson = {
         type: 'FeatureCollection',
-        features: hospitals.map(hospital => {
+        features: gynec.map(hospital => {
             return {
                 type: 'Feature',
                 geometry: {
@@ -99,7 +101,7 @@ function Gynec() {
                     flexDirection: 'column'
                 }}
             >
-                {cardiac.map((hospital) => (
+                {gynec.map((hospital) => (
                     <Box
                         key={hospital.index}
                         sx={{
@@ -250,7 +252,20 @@ function Gynec() {
                                 <Box
                                     p={7}
                                 >
-                                    <img src='../../../public/temp-image-map.png' className='map' width='300px' height='300px' alt='map' />
+                                    <ReactMapGL {...viewport}
+    mapboxAccessToken="pk.eyJ1IjoicHJhdGhhbXRoZTFzdCIsImEiOiJjbGZ3czN0aXUwazlkM2VxdWljcmt3MjhzIn0.45U1YoK40iFNEeQey6iBOA"
+    mapStyle={"mapbox://styles/mapbox/streets-v11"}
+    style={{width: '300px', height: '300px'}}
+    onViewportChange={viewport => {
+      setViewport(viewport);
+    }}
+    onLoad={onLoad}
+  >
+    <Source id="places" type="geojson" data={geojson}>
+        <Layer {...layerStyle} />
+    </Source>
+
+  </ReactMapGL>
                                 </Box>
                             </Box>
                         </Box>
