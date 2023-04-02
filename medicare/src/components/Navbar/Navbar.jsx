@@ -117,13 +117,13 @@ function Navbar() {
                   />
                 </Box>
                 <Box height='30px' />
-                <Box m='15px'>
+                {/* <Box m='15px'>
                   <NavbarItem
                     text='Blood'
                     color='#ffffff'
                     link='/donation'
                     click={() => setIsDrawerOpen(false)} />
-                </Box>
+                </Box> */}
                 <Box height='30px' />
               </Box>
             </Drawer>
@@ -153,13 +153,13 @@ function Navbar() {
                   link='/signup'
                 />
               </Box>
-              <Box m='15px'>
+              {/* <Box m='15px'>
                 <NavbarItem
                   text='Blood'
                   color='#ffffff'
                   link='/bloodbank'
                 />
-              </Box>
+              </Box> */}
               <Box m='15px'>
                 <Link to='/profile'>
                   <AccountCircleIcon sx={{

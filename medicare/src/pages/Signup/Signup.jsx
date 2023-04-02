@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react'
+import { useNavigate } from 'react-router-dom'
 // import Logo from '../../components/Logo/Logo'
 import { motion } from 'framer-motion'
 import './Signup.css'
@@ -15,8 +15,8 @@ import { Box, Typography, useMediaQuery, TextField, Button, InputAdornment, Icon
 import Logo from '../../components/Logo/Logo'
 import UserButton from '../../components/Button/UserButton';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
-// import { auth, db, analytics, googleauth } from '../../config/firebase'
-// import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth, db, analytics, googleauth } from '../../config/firebase'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 const container = {
     hidden: {
@@ -98,10 +98,27 @@ const item5 = {
     }
 };
 function Signup() {
-    const [username, setUsername] = useState('')
+    // const navigate = useNavigate()
+    const [error,setError] = useState(false)
+    const [user, setUser] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const handleLogin = () => {
-
+    const [allergy, setAllergy] = useState('')
+    const navigate = useNavigate()
+    const [age, setAge] = useState('')
+    const [bg, setbg] = useState('')
+    const [phone, setPhone] = useState('')
+    const handleSignup = async () => {
+        try {
+            await createUserWithEmailAndPassword(auth, email, password)
+            setError(false)
+            setUser(auth.currentUser)
+            navigate('/')
+        }
+        catch (err) {
+            setError(true)
+            console.log(err)
+        }
     }
     const breakpoint = useMediaQuery("(max-width:720px)")
     return (
@@ -139,6 +156,18 @@ function Signup() {
                         >
                             Signup
                         </Typography>
+                        {error && <Box
+                            sx={{
+                                backgroundColor: 'red',
+                                color: 'white',
+                                borderRadius: '5px',
+                                padding: '5px',
+                                margin: '10px 0',
+                                width: '100%',
+                                textAlign: 'center',
+                            }}
+                        >Error 404 Not Found
+                            </Box>}
                     </motion.div>
                     <motion.div
                         variants={item2}
@@ -152,6 +181,8 @@ function Signup() {
                         >
                             <TextField
                                 variant='outlined'
+                                value={email}
+                                onChange = {(e) => setEmail(e.target.value)}
                                 className='field'
                                 type='email'
                                 placeholder='Email'
@@ -170,7 +201,6 @@ function Signup() {
                                     borderRadius: '0 !important',
                                 }}
                                 size='small'
-                                onChange={(e) => setUsername(e.target.value)}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -186,6 +216,8 @@ function Signup() {
                             <TextField
                                 variant='outlined'
                                 className='field'
+                                value={password}
+                                onChange = {(e) => setPassword(e.target.value)}
                                 type='password'
                                 placeholder='Password'
                                 sx={{
@@ -203,7 +235,6 @@ function Signup() {
                                     borderRadius: '0 !important',
                                 }}
                                 size='small'
-                                onChange={(e) => setUsername(e.target.value)}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -232,6 +263,8 @@ function Signup() {
                                 select
                                 variant='outlined'
                                 className='field'
+                                value={bg}
+                                onChange = {(e) => setbg(e.target.value)}
                                 // placeholder='Blood Group'
                                 // label='Blood Group'
                                 sx={{
@@ -250,8 +283,6 @@ function Signup() {
                                     'width': !breakpoint ? '250px' : '438px'
                                 }}
                                 size='small'
-                                value={'A+'}
-                                onChange={(e) => setPassword(e.target.value)}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -278,6 +309,8 @@ function Signup() {
                             <TextField
                                 variant='outlined'
                                 className='field'
+                                value={age}
+                                onChange = {(e) => setAge(e.target.value)}
                                 typ='number'
                                 placeholder='Age'
                                 sx={{
@@ -295,7 +328,6 @@ function Signup() {
                                     borderRadius: '0 !important',
                                 }}
                                 size='small'
-                                onChange={(e) => setPassword(e.target.value)}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -325,6 +357,8 @@ function Signup() {
                                     variant='outlined'
                                     className='field'
                                     type=''
+                                    value={phone}
+                                    onChange = {(e) => setPhone(e.target.value)}
                                     placeholder='Phone no.'
                                     sx={{
                                         '& .MuiOutlinedInput-root': {
@@ -341,7 +375,7 @@ function Signup() {
                                         borderRadius: '0 !important',
                                     }}
                                     size='small'
-                                    onChange={(e) => setUsername(e.target.value)}
+                                    // onChange={(e) => setUsername(e.target.value)}
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position="start">
@@ -357,6 +391,8 @@ function Signup() {
                                 <TextField
                                     variant='outlined'
                                     className='field'
+                                    value={allergy}
+                                    onChange = {(e) => setAllergy(e.target.value)}
                                     type='text'
                                     placeholder='Allergies'
                                     sx={{
@@ -374,7 +410,6 @@ function Signup() {
                                         borderRadius: '0 !important',
                                     }}
                                     size='small'
-                                    onChange={(e) => setUsername(e.target.value)}
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position="start">
@@ -417,7 +452,7 @@ function Signup() {
                         animate='visible'
                     >
                         <Box m='20px'>
-                            <UserButton text='Signup' />
+                            <UserButton text='Signup' click={handleSignup} />
                         </Box>
                     </motion.div>
 

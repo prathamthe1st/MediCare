@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react'
-// import Logo from '../../components/Logo/Logo'
 import { motion } from 'framer-motion'
 import './Login.css'
 import PersonIcon from '@mui/icons-material/Person';
@@ -9,8 +8,8 @@ import { Link } from 'react-router-dom'
 import { Box, Typography, useMediaQuery, TextField, Button, InputAdornment, IconButton, Checkbox } from '@mui/material'
 import Logo from '../../components/Logo/Logo'
 import UserButton from '../../components/Button/UserButton';
-// import { auth, db, analytics, googleauth } from '../../config/firebase'
-// import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth, db, analytics, googleauth } from '../../config/firebase'
+import { signInWithEmailAndPassword } from 'firebase/auth'   
 
 const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -21,8 +20,6 @@ const container = {
             type: 'tween',
             delay: 0.5,
             duration: 0.3,
-            // delayChildren: 0.3,
-            // staggerChildren: 0.3
         }
     }
 };
@@ -101,10 +98,25 @@ const item6 = {
     }
 };
 function Login() {
+    const [error, setError] = useState(false)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const handleLogin = () => {
-
+    const handleLogin = async() => {
+        try {
+            await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+                setError(false)
+                setCurrentUser(auth.currentUser)
+                reRender()
+                const user = userCredential.user;
+                console.log(user)
+                navigate('/')
+            })
+            console.log("User Signed In")
+        }
+        catch (err) {
+            setError(true)
+            console.log(err)
+        }
     }
     const breakpoint = useMediaQuery("(max-width:910px)")
     return (
@@ -141,6 +153,18 @@ function Login() {
                             >
                                 Login
                             </Typography>
+                            {error && <Box
+                                sx={{
+                                    backgroundColor: 'red',
+                                    color: 'white',
+                                    borderRadius: '5px',
+                                    padding: '5px',
+                                    margin: '10px 0',
+                                    width: '100%',
+                                    textAlign: 'center',
+                                }}
+                            >Error 404 Not Found
+                            </Box>}
                         </motion.div>
                         <motion.div
                             variants={item2}
@@ -258,7 +282,7 @@ function Login() {
                             animate='visible'
                         >
                             <Box m='20px'>
-                                <UserButton text='Login' />
+                                <UserButton text='Login' click={handleLogin} />
                             </Box>
                             <motion.div
                                 variants={item6}
