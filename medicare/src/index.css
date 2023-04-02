@@ -8,8 +8,7 @@ html {
     top: 0;
     /* height: 100%; */
     /* position: relative; */
-    /* background-image: url(/background.svg); */
-    background-color: rgb(255, 255, 255);
+    /* background: linear-gradient(to bottom white , rgba(0,0,0,0.7)); */
     background-attachment: fixed;
     background-repeat: no-repeat;
     -mox-background-attachment: fixed;

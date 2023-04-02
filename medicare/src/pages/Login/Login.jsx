@@ -88,6 +88,18 @@ const item5 = {
         }
     }
 };
+const item6 = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            type: 'tween',
+            delay: 2.0,
+            duration: 0.3,
+        }
+    }
+};
 function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -104,7 +116,7 @@ function Login() {
         >
             <Box sx={{
                 backgroundColor: 'transparent',
-                height: '70vh',
+                height: '60vh',
                 maxWidth: 400,
                 margin: '50px auto',
                 borderRadius: '30px',
@@ -112,7 +124,6 @@ function Login() {
             }}>
                 <Box display='flex' alignItems='center' flexDirection='column' height='100%'>
                     <Box height='10px' />
-                    <Logo />
                     <Box display='flex' flexDirection='column' textAlign='center' width='100%'>
                         <motion.div
                             className="item1"
@@ -124,6 +135,7 @@ function Login() {
                                 variant='h6'
                                 m='20px'
                                 sx={{
+                                    fontFamily: 'Poppins',
                                     fontWeight: 'bold',
                                 }}
                             >
@@ -246,26 +258,27 @@ function Login() {
                             animate='visible'
                         >
                             <Box m='20px'>
-                                {/* <Button
-                                    variant='contained'
-                                    type='submit'
-                                    sx={{
-                                        '&:hover': {
-                                            background: 'linear-gradient(45deg, #fc7e17, #e8a976)',
-                                            transition: '0.3s ease-in-out',
-                                            boxShadow: 'none',
-                                        },
-                                        p: '10px 100px',
-                                        borderRadius: 0,
-                                        backgroundColor: '#b91bff',
-                                        color: '#fff'
-                                    }}
-                                    // onClick={handleLogin}
-                                >
-                                    Login
-                                </Button> */}
                                 <UserButton text='Login' />
                             </Box>
+                            <motion.div
+                                variants={item6}
+                                initial='hidden'
+                                animate='visible'
+                            >
+                                <Link
+                                    to='/signup'
+                                    style={{
+                                        textDecoration: 'none',
+                                        color: '#000000'
+                                    }}
+                                >
+                                    <Typography
+                                        fontFamily={'Poppins'}
+                                    >
+                                        Dont have an account?? Sign In
+                                    </Typography>
+                                </Link>
+                            </motion.div>
                         </motion.div>
                     </Box>
                 </Box>

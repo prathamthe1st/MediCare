@@ -1,11 +1,15 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Box, Typography } from '@mui/material'
 import { motion } from 'framer-motion'
 import './Emergency.css'
 import { useMediaQuery } from '@mui/material'
 import IconedEmergency from '../../components/IconedEmergency/IconedEmergency'
 import WhatshotIcon from '@mui/icons-material/Whatshot';
+import ReactMapGL, { Source, Layer } from 'react-map-gl';
+import { db } from '../../config/firebase';
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+
 
 const emergencybox1Animation = {
     hidden: {
@@ -120,9 +124,95 @@ function Emergency() {
     const [selected, setSelected] = useState('ENTs')
     const breakpoint = useMediaQuery('(max-width: 840px)')
 
+    // calling data from firebase storing it in hospitals
+    const [hospitals, setHospitals] = useState([]);
+
+    useEffect(() => {
+        const getFirebaseData = async () => {
+            const hospitalDataRef = collection(db, 'HospitalData');
+            const hospitalDataSnapshot = await getDocs(hospitalDataRef);
+            const hospitals = hospitalDataSnapshot.docs.map(doc => doc.data());
+            setHospitals(hospitals);
+        };
+        getFirebaseData();
+    }, []);
+
+    // setting the viewport to the first hospital in the array
+    useEffect(() => {
+        if (hospitals.length > 0) {
+            setViewport({
+                latitude: hospitals[0].latitude,
+                longitude: hospitals[0].longitude,
+                zoom: 9
+            });
+        }
+    }, [hospitals]);
+
+    const [viewport, setViewport] = useState({
+        // Using some default values for the latitude and longitude in case the hospitals array is empty or undefined
+        latitude: 0,
+        longitude: 0,
+        zoom: 10
+    });
+
+    //   marker for the map
+    const geojson = {
+        type: 'FeatureCollection',
+        features: hospitals.map(hospital => {
+            return {
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: [hospital.longitude, hospital.latitude]
+                },
+                properties: {
+                    name: hospital.Name,
+                    address: hospital.Address,
+                    email: hospital.Email,
+                    speciality: hospital.Speciality,
+                    capacity: hospital.Capacity,
+                    available: hospital.Available,
+                    rating: hospital.Rating
+                }
+            };
+        })
+    };
+
+    const layerStyle = {
+        id: 'hospitals-markers',
+        type: 'symbol',
+        source: 'hospitals',
+        layout: {
+          // Use a custom image as the marker icon
+          'icon-image': 'pin',
+          'icon-size': 0.3
+        }
+        // paint: {
+        //   // Set the color of the marker icon
+        //   'icon-color': '#78546'
+        // }
+      };
+
+    // Add an event listener for when the map loads
+    const onLoad = (event) => {
+        // Get the map instance from the event object
+        const map = event.target;
+        // Create a new image element to load the pin image
+        const pinImage = new Image();
+        // Set an onload handler for the image element
+        pinImage.onload = () => {
+            // Add the image to the map with the id 'pin'
+            map.addImage('pin', pinImage);
+        };
+        // Set the source of the image element to the pin image file
+        pinImage.src = 'PIN.png';
+    };
+
+
     return (
+
         <Box sx={{
-            background: 'linear-gradient(to bottom , #01570c , #019114 , transparent)',
+            background: 'linear-gradient(to bottom , #6bff84, transparent)',
             height: !breakpoint ? '70vh' : '150vh',
             maxWidth: 1000,
             margin: '50px auto',
@@ -147,7 +237,8 @@ function Emergency() {
             >
                 <Typography
                     sx={{
-                        color: '#fff',
+                        color: '#000000',
+                        fontFamily: 'Poppins',
                         fontSize: '15px',
                     }}
                 >
@@ -223,7 +314,8 @@ function Emergency() {
             >
                 <Typography
                     sx={{
-                        color: '#fff',
+                        color: '#000000',
+                        fontFamily: 'Poppins',
                         fontSize: '15px',
                         m: '10px',
                     }}
@@ -235,7 +327,19 @@ function Emergency() {
                     initial='hidden'
                     animate='visible'
                 >
-                    <img src='../../../public/temp-image-map.png' width='300px' height='300px' />
+                    <ReactMapGL {...viewport}
+                        mapboxAccessToken="pk.eyJ1IjoicHJhdGhhbXRoZTFzdCIsImEiOiJjbGZ3czN0aXUwazlkM2VxdWljcmt3MjhzIn0.45U1YoK40iFNEeQey6iBOA"
+                        mapStyle={"mapbox://styles/mapbox/streets-v11"}
+                        style={{ width: '300px', height: '300px' }}
+                        onViewportChange={viewport => {
+                            setViewport(viewport);
+                        }}
+                        onLoad={onLoad}
+                    >
+                        <Source id="places" type="geojson" data={geojson}>
+                            <Layer {...layerStyle} />
+                        </Source>
+                    </ReactMapGL>
                 </motion.div>
             </Box>
         </Box>

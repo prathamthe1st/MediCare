@@ -13,6 +13,8 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link } from 'react-router-dom'
 import { Box, Typography, useMediaQuery, TextField, Button, InputAdornment, IconButton, Checkbox, MenuItem } from '@mui/material'
 import Logo from '../../components/Logo/Logo'
+import UserButton from '../../components/Button/UserButton';
+import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 // import { auth, db, analytics, googleauth } from '../../config/firebase'
 // import { signInWithEmailAndPassword } from 'firebase/auth'
 
@@ -112,109 +114,205 @@ function Signup() {
         >
             <Box sx={{
                 backgroundColor: 'transparent',
-                height: !breakpoint ? '80vh' : '110vh',
+                height: !breakpoint ? '70vh' : '110vh',
                 maxWidth: 800,
                 margin: '50px auto',
                 borderRadius: '30px',
                 boxShadow: '0px 5px 10px 0px rgba(0, 0, 0, 0.5)',
             }}>
                 <Box display='flex' alignItems='center' flexDirection='column' height='100%'>
-                        <motion.div
-                            className="item1"
-                            variants={item1}
-                            initial='hidden'
-                            animate='visible'
+                    <motion.div
+                        className="item1"
+                        variants={item1}
+                        initial='hidden'
+                        animate='visible'
+                    >
+                        <Typography
+                            variant='h6'
+                            m='20px'
+                            sx={{
+                                color: 'black',
+                                fontSize: '1.5rem',
+                                textTransform: 'uppercase',
+                                fontWeight: 'bold',
+                            }}
                         >
-                            <Typography
-                                variant='h6'
-                                m='20px'
+                            Signup
+                        </Typography>
+                    </motion.div>
+                    <motion.div
+                        variants={item2}
+                        initial='hidden'
+                        animate='visible'
+                    >
+                        <Box m='20px 20px 0 20px'
+                            display='flex'
+                            flexDirection={!breakpoint ? 'row' : 'column'}
+                            justifyContent='space-evenly'
+                        >
+                            <TextField
+                                variant='outlined'
+                                className='field'
+                                type='email'
+                                placeholder='Email'
                                 sx={{
-                                    fontWeight: 'bold',
+                                    '& .MuiOutlinedInput-root': {
+                                        '&:hover fieldset': {
+                                            transition: '0.2s',
+                                            borderColor: 'back',
+                                        },
+                                    },
+                                    "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                        border: "1px solid #484850",
+                                        borderRadius: "5px 5px 0 0",
+                                    },
+                                    m: '10px',
+                                    borderRadius: '0 !important',
+                                }}
+                                size='small'
+                                onChange={(e) => setUsername(e.target.value)}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <IconButton sx={{
+                                                color: '#000000'
+                                            }}>
+                                                <EmailIcon />
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }}
+                            />
+                            <TextField
+                                variant='outlined'
+                                className='field'
+                                type='password'
+                                placeholder='Password'
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        '&:hover fieldset': {
+                                            transition: '0.2s',
+                                            borderColor: 'back',
+                                        },
+                                    },
+                                    "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                        border: "1px solid #484850",
+                                        borderRadius: "5px 5px 0 0",
+                                    },
+                                    m: '10px',
+                                    borderRadius: '0 !important',
+                                }}
+                                size='small'
+                                onChange={(e) => setUsername(e.target.value)}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <IconButton sx={{
+                                                color: '#000000'
+                                            }}>
+                                                <LockOpenIcon />
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }}
+                            />
+                        </Box>
+                    </motion.div>
+                    <motion.div
+                        variants={item3}
+                        initial='hidden'
+                        animate='visible'
+                    >
+                        <Box m='20px'
+                            display='flex'
+                            flexDirection={!breakpoint ? 'row' : 'column'}
+                            justifyContent='space-evenly'
+                        >
+                            <TextField
+                                select
+                                variant='outlined'
+                                className='field'
+                                // placeholder='Blood Group'
+                                // label='Blood Group'
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        '&:hover fieldset': {
+                                            transition: '0.2s',
+                                            borderColor: 'black',
+                                        },
+                                    },
+                                    "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                        border: "1px solid #484850",
+                                        borderRadius: "5px 5px 0 0",
+                                    },
+                                    m: '10px',
+                                    borderRadius: '0 !important',
+                                    'width': !breakpoint ? '250px' : '438px'
+                                }}
+                                size='small'
+                                value={'A+'}
+                                onChange={(e) => setPassword(e.target.value)}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <IconButton
+                                                sx={{
+                                                    color: '#000000'
+                                                }}
+                                            >
+                                                <BloodtypeIcon />
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
                                 }}
                             >
-                                Signup
-                            </Typography>
-                        </motion.div>
+                                <MenuItem value='A+'>A+</MenuItem>
+                                <MenuItem value='B+'>B+</MenuItem>
+                                <MenuItem value='AB+'>AB+</MenuItem>
+                                <MenuItem value='O+'>O+</MenuItem>
+                                <MenuItem value='O-'>O-</MenuItem>
+                                <MenuItem value='A'>A</MenuItem>
+                                <MenuItem value='AB-'>AB-</MenuItem>
+                                <MenuItem value='A-'>A-</MenuItem>
+                            </TextField>
+                            <TextField
+                                variant='outlined'
+                                className='field'
+                                typ='number'
+                                placeholder='Age'
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        '&:hover fieldset': {
+                                            transition: '0.2s',
+                                            borderColor: 'black',
+                                        },
+                                    },
+                                    "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                        border: "1px solid #484850",
+                                        borderRadius: "5px 5px 0 0",
+                                    },
+                                    m: '10px',
+                                    borderRadius: '0 !important',
+                                }}
+                                size='small'
+                                onChange={(e) => setPassword(e.target.value)}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <IconButton
+                                                sx={{
+                                                    color: '#000000'
+                                                }}
+                                            >
+                                                <ElderlyWomanIcon />
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }}
+                            />
+                        </Box>
                         <motion.div
                             variants={item2}
-                            initial='hidden'
-                            animate='visible'
-                        >
-                            <Box m='20px 20px 0 20px'
-                                display='flex'
-                                flexDirection={!breakpoint ? 'row' : 'column'}
-                                justifyContent='space-evenly'
-                            >
-                                <TextField
-                                    variant='outlined'
-                                    className='field'
-                                    type='email'
-                                    placeholder='Email'
-                                    sx={{
-                                        '& .MuiOutlinedInput-root': {
-                                            '&:hover fieldset': {
-                                                transition: '0.2s',
-                                                borderColor: 'back',
-                                            },
-                                        },
-                                        "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                                            border: "1px solid #484850",
-                                            borderRadius: "5px 5px 0 0",
-                                        },
-                                        m: '10px',
-                                        borderRadius: '0 !important',
-                                    }}
-                                    size='small'
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <IconButton sx={{
-                                                    color: '#000000'
-                                                }}>
-                                                    <EmailIcon />
-                                                </IconButton>
-                                            </InputAdornment>
-                                        )
-                                    }}
-                                />
-                                <TextField
-                                    variant='outlined'
-                                    className='field'
-                                    type='password'
-                                    placeholder='Password'
-                                    sx={{
-                                        '& .MuiOutlinedInput-root': {
-                                            '&:hover fieldset': {
-                                                transition: '0.2s',
-                                                borderColor: 'back',
-                                            },
-                                        },
-                                        "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                                            border: "1px solid #484850",
-                                            borderRadius: "5px 5px 0 0",
-                                        },
-                                        m: '10px',
-                                        borderRadius: '0 !important',
-                                    }}
-                                    size='small'
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <IconButton sx={{
-                                                    color: '#000000'
-                                                }}>
-                                                    <LockOpenIcon />
-                                                </IconButton>
-                                            </InputAdornment>
-                                        )
-                                    }}
-                                />
-                            </Box>
-                        </motion.div>
-                        <motion.div
-                            variants={item3}
                             initial='hidden'
                             animate='visible'
                         >
@@ -224,16 +322,15 @@ function Signup() {
                                 justifyContent='space-evenly'
                             >
                                 <TextField
-                                    select
                                     variant='outlined'
                                     className='field'
-                                    // placeholder='Blood Group'
-                                    // label='Blood Group'
+                                    type=''
+                                    placeholder='Phone no.'
                                     sx={{
                                         '& .MuiOutlinedInput-root': {
                                             '&:hover fieldset': {
                                                 transition: '0.2s',
-                                                borderColor: 'black',
+                                                borderColor: 'back',
                                             },
                                         },
                                         "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
@@ -242,44 +339,31 @@ function Signup() {
                                         },
                                         m: '10px',
                                         borderRadius: '0 !important',
-                                        'width': !breakpoint ? '250px' : '438px'
                                     }}
                                     size='small'
-                                    value={'A+'}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={(e) => setUsername(e.target.value)}
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <IconButton
-                                                    sx={{
-                                                        color: '#000000'
-                                                    }}
-                                                >
-                                                    <BloodtypeIcon />
+                                                <IconButton sx={{
+                                                    color: '#000000'
+                                                }}>
+                                                    <LocalPhoneIcon />
                                                 </IconButton>
                                             </InputAdornment>
                                         )
                                     }}
-                                >
-                                    <MenuItem value='A+'>A+</MenuItem>
-                                    <MenuItem value='B+'>B+</MenuItem>
-                                    <MenuItem value='AB+'>AB+</MenuItem>
-                                    <MenuItem value='O+'>O+</MenuItem>
-                                    <MenuItem value='O-'>O-</MenuItem>
-                                    <MenuItem value='A'>A</MenuItem>
-                                    <MenuItem value='AB-'>AB-</MenuItem>
-                                    <MenuItem value='A-'>A-</MenuItem>
-                                </TextField>
+                                />
                                 <TextField
                                     variant='outlined'
                                     className='field'
-                                    typ='number'
-                                    placeholder='Age'
+                                    type='text'
+                                    placeholder='Allergies'
                                     sx={{
                                         '& .MuiOutlinedInput-root': {
                                             '&:hover fieldset': {
                                                 transition: '0.2s',
-                                                borderColor: 'black',
+                                                borderColor: 'back',
                                             },
                                         },
                                         "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
@@ -290,163 +374,55 @@ function Signup() {
                                         borderRadius: '0 !important',
                                     }}
                                     size='small'
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={(e) => setUsername(e.target.value)}
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <IconButton
-                                                    sx={{
-                                                        color: '#000000'
-                                                    }}
-                                                >
-                                                    <ElderlyWomanIcon />
+                                                <IconButton sx={{
+                                                    color: '#000000'
+                                                }}>
+                                                    <CoronavirusIcon />
                                                 </IconButton>
                                             </InputAdornment>
                                         )
                                     }}
                                 />
                             </Box>
-                            <motion.div
-                                variants={item2}
-                                initial='hidden'
-                                animate='visible'
+                        </motion.div>
+                    </motion.div>
+                    <motion.div
+                        variants={item4}
+                        initial='hidden'
+                        animate='visible'
+                    >
+                        <Link
+                            to='/login'
+                            style={{
+                                textDecoration: 'none',
+                                color: '#000000'
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    fontFamily: 'Poppins',
+                                }}
                             >
-                                <Box m='20px'
-                                    display='flex'
-                                    flexDirection={!breakpoint ? 'row' : 'column'}
-                                    justifyContent='space-evenly'
-                                >
-                                    <TextField
-                                        variant='outlined'
-                                        className='field'
-                                        type='email'
-                                        placeholder='Email'
-                                        sx={{
-                                            '& .MuiOutlinedInput-root': {
-                                                '&:hover fieldset': {
-                                                    transition: '0.2s',
-                                                    borderColor: 'back',
-                                                },
-                                            },
-                                            "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                                                border: "1px solid #484850",
-                                                borderRadius: "5px 5px 0 0",
-                                            },
-                                            m: '10px',
-                                            borderRadius: '0 !important',
-                                        }}
-                                        size='small'
-                                        onChange={(e) => setUsername(e.target.value)}
-                                        InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <IconButton sx={{
-                                                        color: '#000000'
-                                                    }}>
-                                                        <EmailIcon />
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                    />
-                                    <TextField
-                                        variant='outlined'
-                                        className='field'
-                                        type='password'
-                                        placeholder='Password'
-                                        sx={{
-                                            '& .MuiOutlinedInput-root': {
-                                                '&:hover fieldset': {
-                                                    transition: '0.2s',
-                                                    borderColor: 'back',
-                                                },
-                                            },
-                                            "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                                                border: "1px solid #484850",
-                                                borderRadius: "5px 5px 0 0",
-                                            },
-                                            m: '10px',
-                                            borderRadius: '0 !important',
-                                        }}
-                                        size='small'
-                                        onChange={(e) => setUsername(e.target.value)}
-                                        InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <IconButton sx={{
-                                                        color: '#000000'
-                                                    }}>
-                                                        <LockOpenIcon />
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                    />
-                                </Box>
-                            </motion.div>
-                        </motion.div>
-                        <motion.div
-                            variants={item4}
-                            initial='hidden'
-                            animate='visible'
-                        >
-                            <Box width='100%' display='flex' flexDirection='row' alignItems='center' justifyContent='space-between'>
-                                <Typography
-                                    sx={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
-                                    }}
-                                >
-                                    <Checkbox />
-                                    Remember me
-                                </Typography>
-                                <Link
-                                    to='/'
-                                    style={{
-                                        textDecoration: 'none',
-                                        color: '#000000'
-                                    }}
-                                >
-                                    <Typography>
-                                        Forgot Password
-                                    </Typography>
-                                </Link>
-                            </Box>
-                        </motion.div>
-                        <motion.div
-                            variants={item5}
-                            initial='hidden'
-                            animate='visible'
-                        >
-                            <Box m='20px'>
-                                <Button
-                                    className='button'
-                                    variant='contained'
-                                    type='submit'
-                                    sx={{
-                                        // '&':{
-                                        //     transition: 'all 0.3s ease-in-out',
-                                        // },
-                                        // '&:hover': {
-                                        //     transition: 'all 0.3s ease-in-out',
-                                        //     background: 'linear-gradient(45deg, #fc7e17, #e8a976) !important',
-                                        //     boxShadow: 'none !important',
-                                        // },
-                                        p: '10px 100px',
-                                        borderRadius: 12,
-                                        backgroundColor: '#CE7FD9',
-                                        // backgroundColor: '#ffffff',
-                                        color: '#000000'
-                                    }}
-                                // onClick={handleLogin}
-                                >
-                                    Signup
-                                </Button>
-                            </Box>
-                        </motion.div>
-                    </Box>
+                                Already have an account? Login
+                            </Typography>
+                        </Link>
+                    </motion.div>
+                    <motion.div
+                        variants={item5}
+                        initial='hidden'
+                        animate='visible'
+                    >
+                        <Box m='20px'>
+                            <UserButton text='Signup' />
+                        </Box>
+                    </motion.div>
+
                 </Box>
+            </Box>
         </motion.div>
     )
 }
