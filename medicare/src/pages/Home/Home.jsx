@@ -185,7 +185,7 @@ function Home() {
                     initial='hidden'
                     animate='visible'
                 >
-                    <img src='../../../public/ambulance.png' />
+                    <img src='/MediCare/medicare/public/ambulance.png' />
                 </motion.div>
             </Box>
             <Box height='30px' />
@@ -228,7 +228,7 @@ function Home() {
                             alignItems: 'center',
                         }}
                     >
-                        <img src='../../../public/Brain.svg' width='200px' height='200px' margin='0' />
+                        <img src='/Brain.svg' width='200px' height='200px' margin='0' />
                     </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -244,7 +244,7 @@ function Home() {
                             alignItems: 'center',
                         }}
                     >
-                        <img src='../../../public/cardiac.svg' width='200px' height='200px' margin='0' />
+                        <img src='/cardiac.svg' width='200px' height='200px' margin='0' />
                     </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -260,7 +260,7 @@ function Home() {
                             alignItems: 'center',
                         }}
                     >
-                        <img src='../../../public/baby.svg' width='200px' height='200px' margin='0' />
+                        <img src='/baby.svg' width='200px' height='200px' margin='0' />
                     </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -277,7 +277,7 @@ function Home() {
                             // padding:'20px'
                         }}
                     >
-                        <img src='../../../public/vet.svg' width='200px' height='200px' margin='0' />
+                        <img src='/vet.svg' width='200px' height='200px' margin='0' />
                     </Box>
                 </Grid>
             </Grid>
