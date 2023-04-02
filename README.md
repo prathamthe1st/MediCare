@@ -8,7 +8,7 @@ We used react.js + firebase
 
 ### Live Demo
 
-https://prathamthe1st.github.io/
+https://prathamthe1st.github.io/MediCare/
 
 ### Screenshots
 
