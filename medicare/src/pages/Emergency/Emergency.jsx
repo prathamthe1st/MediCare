@@ -198,7 +198,7 @@ function Emergency() {
             map.addImage('pin', pinImage);
         };
         // Set the source of the image element to the pin image file
-        pinImage.src = 'PIN.png';
+        pinImage.src = 'medicare/public/PIN.png';
     };
     return (
 
