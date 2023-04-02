@@ -11,10 +11,13 @@ function UserButton({text , click}) {
                 variant='contained'
                 type='submit'
                 sx={{
+                    '&:hover': {
+                        backgroundColor: '#ff0000',
+                    },
                     p: '10px 60px',
                     borderRadius: 30,
-                    backgroundColor: '#b91bff',
-                    color: '#fff'
+                    backgroundColor: 'transparent',
+                    color: '#000000'
                 }}
                 onClick={click}
             >

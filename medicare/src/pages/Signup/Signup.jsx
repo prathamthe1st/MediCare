@@ -119,9 +119,6 @@ function Signup() {
                 boxShadow: '0px 5px 10px 0px rgba(0, 0, 0, 0.5)',
             }}>
                 <Box display='flex' alignItems='center' flexDirection='column' height='100%'>
-                    <Box height='10px' />
-                    <Logo />
-                    <Box display='flex' flexDirection='column' textAlign='center' width='100%'>
                         <motion.div
                             className="item1"
                             variants={item1}
@@ -276,7 +273,7 @@ function Signup() {
                                 <TextField
                                     variant='outlined'
                                     className='field'
-                                    typw='number'
+                                    typ='number'
                                     placeholder='Age'
                                     sx={{
                                         '& .MuiOutlinedInput-root': {
@@ -393,7 +390,7 @@ function Signup() {
                             initial='hidden'
                             animate='visible'
                         >
-                            <Box display='flex' flexDirection='row' alignItems='center' justifyContent='space-evenly'>
+                            <Box width='100%' display='flex' flexDirection='row' alignItems='center' justifyContent='space-between'>
                                 <Typography
                                     sx={{
                                         display: 'flex',
@@ -450,7 +447,6 @@ function Signup() {
                         </motion.div>
                     </Box>
                 </Box>
-            </Box>
         </motion.div>
     )
 }
