@@ -9,7 +9,7 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import ReactMapGL, { Source, Layer } from 'react-map-gl';
 import { db } from '../../config/firebase';
 import { getFirestore, collection, getDocs } from "firebase/firestore";
-
+import { useNavigate } from 'react-router-dom'
 
 const emergencybox1Animation = {
     hidden: {
@@ -118,13 +118,11 @@ const mapAnimation = {
     }
 }
 
-
-
 function Emergency() {
-    const [selected, setSelected] = useState('ENTs')
+    // const [selected, setSelected] = useState('ENTs')
     const breakpoint = useMediaQuery('(max-width: 840px)')
+    const navigate = useNavigate()
 
-    // calling data from firebase storing it in hospitals
     const [hospitals, setHospitals] = useState([]);
 
     useEffect(() => {
@@ -137,7 +135,6 @@ function Emergency() {
         getFirebaseData();
     }, []);
 
-    // setting the viewport to the first hospital in the array
     useEffect(() => {
         if (hospitals.length > 0) {
             setViewport({
@@ -149,13 +146,10 @@ function Emergency() {
     }, [hospitals]);
 
     const [viewport, setViewport] = useState({
-        // Using some default values for the latitude and longitude in case the hospitals array is empty or undefined
         latitude: 0,
         longitude: 0,
         zoom: 10
     });
-
-    //   marker for the map
     const geojson = {
         type: 'FeatureCollection',
         features: hospitals.map(hospital => {
@@ -178,22 +172,21 @@ function Emergency() {
         })
     };
 
+
     const layerStyle = {
         id: 'hospitals-markers',
         type: 'symbol',
         source: 'hospitals',
         layout: {
-          // Use a custom image as the marker icon
-          'icon-image': 'pin',
-          'icon-size': 0.3
+            'icon-image': 'pin',
+            'icon-size': 0.3
         }
         // paint: {
         //   // Set the color of the marker icon
         //   'icon-color': '#78546'
         // }
-      };
+    };
 
-    // Add an event listener for when the map loads
     const onLoad = (event) => {
         // Get the map instance from the event object
         const map = event.target;
@@ -207,8 +200,6 @@ function Emergency() {
         // Set the source of the image element to the pin image file
         pinImage.src = 'PIN.png';
     };
-
-
     return (
 
         <Box sx={{
@@ -229,8 +220,6 @@ function Emergency() {
                 justifyContent='center'
                 alignItems='center'
                 sx={{
-                    // ml: '63px',
-                    // width: '400px',
                     padding: !breakpoint ? '50px' : '30px',
                     m: '20px'
                 }}
@@ -250,14 +239,14 @@ function Emergency() {
                         initial='hidden'
                         animate='visible'
                     >
-                        <IconedEmergency icon={'../../../public/ENT.svg'} text='ENTs' click={() => setSelected('ENTs')} />
+                        <IconedEmergency icon={'../../../public/ENT.svg'} text='Surgeon' click={() => { navigate('/surgeon') }} />
                     </motion.div>
                     <motion.div
                         variants={emergencybox2Animation}
                         initial='hidden'
                         animate='visible'
                     >
-                        <IconedEmergency icon={'../../../public/Brain.svg'} text='Neurologist' click={() => setSelected('Neurologists')} />
+                        <IconedEmergency icon={'../../../public/Brain.svg'} text='Neurologist' click={() => { navigate('/neuro') }} />
                     </motion.div>
                 </Box>
                 <Box display='flex' flexDirection='row' justifyContent='center' alignItems='center'>
@@ -266,14 +255,14 @@ function Emergency() {
                         initial='hidden'
                         animate='visible'
                     >
-                        <IconedEmergency icon={'../../../public/vet.svg'} text='Veterinarians' click={() => setSelected('Veterinarians')} />
+                        <IconedEmergency icon={'../../../public/vet.svg'} text='Veterinarians' click={() => { navigate('/vet') }} />
                     </motion.div>
                     <motion.div
                         variants={emergencybox4Animation}
                         initial='hidden'
                         animate='visible'
                     >
-                        <IconedEmergency icon={'../../../public/cardiac.svg'} text='Cardiologists' click={() => setSelected('Cardiologists')} />
+                        <IconedEmergency icon={'../../../public/cardiac.svg'} text='Cardiologists' click={() => { navigate('/cardiac') }} />
                     </motion.div>
                 </Box>
                 <Box display='flex' flexDirection='row' justifyContent='center' alignItems='center'>
@@ -282,14 +271,14 @@ function Emergency() {
                         initial='hidden'
                         animate='visible'
                     >
-                        <IconedEmergency icon={'../../../public/baby.svg'} text='Pediatricians' click={() => setSelected('Pediatricians')} />
+                        <IconedEmergency icon={'../../../public/baby.svg'} text='Pediatricians' click={() => { navigate('/pedia') }} />
                     </motion.div>
                     <motion.div
                         variants={emergencybox6Animation}
                         initial='hidden'
                         animate='visible'
                     >
-                        <IconedEmergency icon={'../../../public/pregnanr.svg'} text='Gynecologists' click={() => setSelected('Gynecologists')} />
+                        <IconedEmergency icon={'../../../public/pregnanr.svg'} text='Gynecologists' click={() => { navigate('/gynec') }} />
                     </motion.div>
                 </Box>
             </Box>

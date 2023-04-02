@@ -11,27 +11,19 @@ import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import UserButton from './components/Button/UserButton'
 import HospitalCard from './pages/HospitalCard/HospitalCard'
+import Surgeon from '../src/pages/Surgeon/Surgeon'
+import Cardiac from '../src/pages/Cardiac/Cardiac'
+import Gynec from '../src/pages/Gynec/Gynec'
+import Vet from '../src/pages/Vet/Vet'
+import Neuro from '../src/pages/Neuro/Neuro'
+import Pedia from '../src/pages/Pedia/Pedia'
+
 
 export const DataContext = createContext();
 
 
 function App() {
   const [data, setData] = useState([]);
-
-  useEffect(
-    () => {
-      axios.get('https://django-hack-api.vercel.app/hospital/')
-        .then(response => {
-          setData(response.data)
-          console.log(data)
-            ;
-        }).catch(err => {
-          console.error(err);
-        });
-      return (() => data)
-    }, []
-  );
-  console.log(data)
   return (
     <BrowserRouter>
       <DataContext.Provider value={data}>
@@ -45,6 +37,12 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/emergency' element={<Emergency />} />
             <Route path='/hospital' element={<HospitalCard />} />
+            <Route path='/surgeon' element={<Surgeon />} />
+            <Route path='/pedia' element={<Pedia />} />
+            <Route path='/cardiac' element={<Cardiac />} />
+            <Route path='/vet' element={<Vet />} />
+            <Route path='/gynec' element={<Gynec />} />
+            <Route path='/neuro' element={<Neuro />} />
           </Routes>
         </div>
       </DataContext.Provider>
