@@ -185,7 +185,7 @@ function Home() {
                     initial='hidden'
                     animate='visible'
                 >
-                    <img src='/MediCare/medicare/public/ambulance.png' />
+                    <img src='/ambulance.png' />
                 </motion.div>
             </Box>
             <Box height='30px' />
